@@ -163,7 +163,7 @@ impl TransactionRequest {
         rlp.append(&0u8);
         let r = rlp.out().into();
 
-        println!("{:?}", r);
+        println!("{:?}", r.as_ref());
 
         r
     }
