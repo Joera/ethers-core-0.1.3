@@ -241,6 +241,7 @@ pub struct Transaction {
     /// The transaction's nonce
     pub nonce: U256,
 
+    /*
     /// Block hash. None when pending.
     #[serde(rename = "blockHash")]
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -255,7 +256,7 @@ pub struct Transaction {
     #[serde(rename = "transactionIndex")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub transaction_index: Option<U64>,
-
+    */
     /// Sender
     pub from: Address,
 
