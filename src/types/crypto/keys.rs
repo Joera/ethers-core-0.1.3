@@ -110,7 +110,6 @@ impl PrivateKey {
     ///
     /// If `tx.to` is an ENS name. The caller MUST take care of name resolution before
     /// calling this function.
-    /*
     pub fn sign_transaction(
         &self,
         tx: TransactionRequest,
@@ -130,7 +129,7 @@ impl PrivateKey {
         let signature = self.sign_with_eip155(&message, chain_id);
 
         // Get the actual transaction hash
-        let rlp = tx.rlp_signed(&signature,&None);
+        let rlp = tx.rlp_signed(&signature, None);
         let hash = keccak256(&rlp.0);
 
         // This function should not be called with ENS names
@@ -153,10 +152,8 @@ impl PrivateKey {
             v: signature.v.into(),
             r: U256::from_big_endian(signature.r.as_bytes()),
             s: U256::from_big_endian(signature.s.as_bytes()),
-            chain_id: Some(String::from("0x1"))
         })
     }
-    */
 
     pub fn sign_with_eip155(&self, message: &Message, chain_id: Option<u64>) -> Signature {
         let (signature, recovery_id) = Secp256k1::sign(message, &self.0);
