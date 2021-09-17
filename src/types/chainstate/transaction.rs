@@ -138,31 +138,28 @@ impl TransactionRequest {
 
     /// Hashes the transaction's data with the provided chain id
     pub fn sighash<T: Into<U64>>(&self, chain_id: Option<T>) -> H256 {
+
+        keccak256(self.rlp(chain_id).as_ref()).into()
+    }
+
+    /// Gets the unsigned transaction's RLP encoding
+    pub fn rlp<T: Into<U64>>(&self, chain_id: T) -> Bytes {
         let mut rlp = RlpStream::new();
-        // "If [..] CHAIN_ID is available, then when  computing the hash of a
-        // transaction for the purposes of signing, instead of hashing only
-        // six rlp encoded elements (nonce, gasprice, startgas, to, value, data),
-        // you SHOULD hash nine rlp encoded elements
-        // (nonce, gasprice, startgas, to, value, data, chainid, 0, 0)"
-        // https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md#specification
+
         let num_els = if chain_id.is_some() {
             UNSIGNED_TX_FIELDS + 3
         } else {
             UNSIGNED_TX_FIELDS
         };
-
         rlp.begin_list(num_els);
         self.rlp_base(&mut rlp);
 
         // Only hash the 3 extra fields when preparing the
         // data to sign if chain_id is present
-        if let Some(chain_id) = chain_id {
-            rlp.append(&chain_id.into());
-            rlp.append(&0u8);
-            rlp.append(&0u8);
-        }
-
-        keccak256(rlp.out().as_ref()).into()
+        rlp.append(&chain_id.into());
+        rlp.append(&0u8);
+        rlp.append(&0u8);
+        rlp.out().freeze().into()
     }
 
     /// Produces the RLP encoding of the transaction with the provided signature
@@ -178,7 +175,7 @@ impl TransactionRequest {
         rlp.append(&signature.r);
         rlp.append(&signature.s);
 
-        rlp.out().into()
+        rlp.out().freeze().into()
     }
 
     fn rlp_base(&self, rlp: &mut RlpStream) {
@@ -191,7 +188,7 @@ impl TransactionRequest {
 
         rlp_opt(rlp, self.to.as_ref());
         rlp_opt(rlp, self.value);
-        rlp_opt(rlp, self.data.as_ref().map(|d| &d.0[..]));
+        rlp_opt(rlp, &self.data.as_ref().map(|d| d.as_ref()));
     }
 }
 
@@ -245,7 +242,6 @@ pub struct Transaction {
     pub nonce: U256,
 
     /// Block hash. None when pending.
-
     #[serde(rename = "blockHash")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub block_hash: Option<H256>,
