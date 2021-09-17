@@ -188,7 +188,7 @@ impl TransactionRequest {
 
         rlp_opt(rlp, self.to.as_ref());
         rlp_opt(rlp, self.value);
-        rlp_opt(rlp, &self.data.as_ref().map(|d| d.as_ref()));
+        rlp_opt(rlp, self.data.as_ref().map(|d| d.as_ref()));
     }
 }
 
