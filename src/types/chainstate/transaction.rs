@@ -342,7 +342,7 @@ impl Transaction {
         rlp.append(&self.input.0);
         rlp.append(&self.v);
         rlp.append(&self.r);
-        rlp.append(&self.s);
+     //   rlp.append(&self.s);
 
         rlp.out().into()
     }
