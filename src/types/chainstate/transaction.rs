@@ -146,7 +146,7 @@ impl TransactionRequest {
     pub fn rlp<T: Into<U64>>(&self, chain_id: T) -> Bytes {
         let mut rlp = RlpStream::new();
 
-        let num_els = if chain_id.is_some() {
+        let num_els = if chain_id == 4u64 {
             UNSIGNED_TX_FIELDS + 3
         } else {
             UNSIGNED_TX_FIELDS
