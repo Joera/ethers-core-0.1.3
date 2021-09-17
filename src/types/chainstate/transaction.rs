@@ -161,8 +161,7 @@ impl TransactionRequest {
         rlp.append(&chain_id.unwrap().into());
         rlp.append(&0u8);
         rlp.append(&0u8);
-        rlp.out().into();
-
+        rlp.out().into()
     }
 
     /// Produces the RLP encoding of the transaction with the provided signature
