@@ -141,7 +141,7 @@ impl TransactionRequest {
 
         let prel = self.rlp(chain_id).as_ref();
 
-        println!("{:?}"prel)
+        println!("{:?}", prel);
 
         keccak256(prel).into()
     }
