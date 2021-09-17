@@ -129,7 +129,7 @@ impl PrivateKey {
         let signature = self.sign_with_eip155(&message, chain_id);
 
         // Get the actual transaction hash
-        let rlp = tx.rlp_signed(&signature, None);
+        let rlp = tx.rlp_signed(&signature);
         let hash = keccak256(&rlp.0);
 
         // This function should not be called with ENS names
