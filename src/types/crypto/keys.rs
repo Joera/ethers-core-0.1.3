@@ -155,7 +155,7 @@ impl PrivateKey {
         })
     }
 
-    fn sign_with_eip155(&self, message: &Message, chain_id: Option<u64>) -> Signature {
+    pub fn sign_with_eip155(&self, message: &Message, chain_id: Option<u64>) -> Signature {
         let (signature, recovery_id) = Secp256k1::sign(message, &self.0);
 
         let v = to_eip155_v(recovery_id, chain_id);
