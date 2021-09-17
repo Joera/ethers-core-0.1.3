@@ -154,13 +154,13 @@ impl TransactionRequest {
             UNSIGNED_TX_FIELDS
         };
         rlp.begin_list(num_els);
-        self.rlp_base(&mut rlp);
+      //  self.rlp_base(&mut rlp);
 
         // Only hash the 3 extra fields when preparing the
         // data to sign if chain_id is present
-        rlp.append(&chain_id.unwrap().into());
-        rlp.append(&0u8);
-        rlp.append(&0u8);
+      //  rlp.append(&chain_id.unwrap().into());
+      //  rlp.append(&0u8);
+      //  rlp.append(&0u8);
         let r : Bytes = rlp.out().into();
         println!("{:?}", r.as_ref());
 
