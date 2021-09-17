@@ -153,7 +153,7 @@ impl TransactionRequest {
         } else {
             UNSIGNED_TX_FIELDS
         };
-        rlp.begin_list(num_els);
+        rlp.begin_list(2);
         self.rlp_base(&mut rlp);
 
         // Only hash the 3 extra fields when preparing the
