@@ -165,7 +165,7 @@ impl TransactionRequest {
     }
 
     /// Produces the RLP encoding of the transaction with the provided signature
-    pub fn rlp_signed(&self, signature: &Signature) -> Bytes {
+    pub fn rlp_signed(&self, signature: &Signature, chain_id: &Option<u64>) -> Bytes {
         let mut rlp = RlpStream::new();
 
         // construct the RLP body
@@ -176,6 +176,8 @@ impl TransactionRequest {
         rlp.append(&signature.v);
         rlp.append(&signature.r);
         rlp.append(&signature.s);
+
+        rlp.append(&chain_id.unwrap().into());
 
         rlp.out().into()
     }
@@ -309,6 +311,9 @@ pub struct Transaction {
     #[cfg_attr(docsrs, doc(cfg(feature = "celo")))]
     #[serde(skip_serializing_if = "Option::is_none", rename = "gatewayFee")]
     pub gateway_fee: Option<U256>,
+
+    #[serde(rename = "chainId", default, skip_serializing_if = "Option::is_none")]
+    pub chain_id: Option<U256>,
 }
 
 impl Transaction {
