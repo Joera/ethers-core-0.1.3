@@ -139,7 +139,11 @@ impl TransactionRequest {
     /// Hashes the transaction's data with the provided chain id
     pub fn sighash<T: Into<U64>>(&self, chain_id: Option<T>) -> H256 {
 
-        keccak256(self.rlp(chain_id).as_ref()).into()
+        let prel = self.rlp(chain_id).as_ref();
+
+        println!("{:?}"prel)
+
+        keccak256(prel).into()
     }
 
     /// Gets the unsigned transaction's RLP encoding
