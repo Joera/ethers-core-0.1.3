@@ -165,7 +165,7 @@ impl TransactionRequest {
 
         println!("{:?}", r);
 
-        r;
+        r
     }
 
     /// Produces the RLP encoding of the transaction with the provided signature
