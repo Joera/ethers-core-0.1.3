@@ -245,7 +245,7 @@ pub struct Transaction {
     pub nonce: U256,
 
     /// Block hash. None when pending.
-    /*
+
     #[serde(rename = "blockHash")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub block_hash: Option<H256>,
@@ -258,7 +258,7 @@ pub struct Transaction {
     /// Transaction Index. None when pending.
     #[serde(rename = "transactionIndex")]
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub transaction_index: Option<U64>, */
+    pub transaction_index: Option<U64>,
 
     /// Sender
     pub from: Address,
@@ -287,7 +287,7 @@ pub struct Transaction {
     pub r: U256,
 
     /// ECDSA signature s
-  //  pub s: U256,
+    pub s: U256,
 
     /////////////////  Celo-specific transaction fields /////////////////
     /// The currency fees are paid in (None for native currency)
@@ -342,7 +342,7 @@ impl Transaction {
         rlp.append(&self.input.0);
         rlp.append(&self.v);
         rlp.append(&self.r);
-     //   rlp.append(&self.s);
+        rlp.append(&self.s);
 
         rlp.out().into()
     }
