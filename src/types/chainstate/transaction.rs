@@ -161,7 +161,7 @@ impl TransactionRequest {
         rlp.append(&chain_id.unwrap().into());
         rlp.append(&0u8);
         rlp.append(&0u8);
-        let r = rlp.out().into();
+        let r : Bytes = rlp.out().into();
         println!("{:?}", r.as_ref());
 
         r
