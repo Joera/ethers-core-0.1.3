@@ -151,7 +151,7 @@ impl PrivateKey {
             input: tx.data.unwrap_or_default(),
             v: signature.v.into(),
             r: U256::from_big_endian(signature.r.as_bytes()),
-            s: U256::from_big_endian(signature.s.as_bytes()),
+        //    s: U256::from_big_endian(signature.s.as_bytes()),
         })
     }
 

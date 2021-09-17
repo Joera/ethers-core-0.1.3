@@ -287,7 +287,7 @@ pub struct Transaction {
     pub r: U256,
 
     /// ECDSA signature s
-    pub s: U256,
+  //  pub s: U256,
 
     /////////////////  Celo-specific transaction fields /////////////////
     /// The currency fees are paid in (None for native currency)
