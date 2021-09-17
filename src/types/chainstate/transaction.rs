@@ -153,7 +153,7 @@ impl TransactionRequest {
         } else {
             UNSIGNED_TX_FIELDS
         };
-        rlp.begin_list(6);
+        rlp.begin_list(1);
         self.rlp_base(&mut rlp);
 
         // Only hash the 3 extra fields when preparing the
@@ -185,15 +185,15 @@ impl TransactionRequest {
 
     fn rlp_base(&self, rlp: &mut RlpStream) {
         rlp_opt(rlp, self.nonce);
-        rlp_opt(rlp, self.gas_price);
-        rlp_opt(rlp, self.gas);
+      //  rlp_opt(rlp, self.gas_price);
+      //  rlp_opt(rlp, self.gas);
 
         #[cfg(feature = "celo")]
         self.inject_celo_metadata(rlp);
 
-        rlp_opt(rlp, self.to.as_ref());
-        rlp_opt(rlp, self.value);
-        rlp_opt(rlp, self.data.as_ref().map(|d| d.as_ref()));
+      //  rlp_opt(rlp, self.to.as_ref());
+      //  rlp_opt(rlp, self.value);
+      //  rlp_opt(rlp, self.data.as_ref().map(|d| d.as_ref()));
     }
 }
 
