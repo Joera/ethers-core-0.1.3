@@ -158,9 +158,9 @@ impl TransactionRequest {
 
         // Only hash the 3 extra fields when preparing the
         // data to sign if chain_id is present
-      //  rlp.append(&chain_id.unwrap().into());
-      //  rlp.append(&0u8);
-      //  rlp.append(&0u8);
+        rlp.append(&chain_id.unwrap().into());
+        rlp.append(&0u8);
+        rlp.append(&0u8);
         let r : Bytes = rlp.out().into();
         println!("{:?}", r.as_ref());
 
@@ -186,14 +186,14 @@ impl TransactionRequest {
     fn rlp_base(&self, rlp: &mut RlpStream) {
         rlp_opt(rlp, self.nonce);
         rlp_opt(rlp, self.gas_price);
-     /*   rlp_opt(rlp, self.gas);
+        rlp_opt(rlp, self.gas);
 
         #[cfg(feature = "celo")]
         self.inject_celo_metadata(rlp);
 
         rlp_opt(rlp, self.to.as_ref());
         rlp_opt(rlp, self.value);
-        rlp_opt(rlp, self.data.as_ref().map(|d| d.as_ref())); */
+        rlp_opt(rlp, self.data.as_ref().map(|d| d.as_ref()));
     }
 }
 
