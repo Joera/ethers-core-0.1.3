@@ -152,7 +152,7 @@ impl PrivateKey {
             v: signature.v.into(),
             r: U256::from_big_endian(signature.r.as_bytes()),
             s: U256::from_big_endian(signature.s.as_bytes()),
-            chain_id: chain_id.unwrap().into()
+            chain_id: "0x1".into()
         })
     }
 
